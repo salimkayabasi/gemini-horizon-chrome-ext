@@ -8,14 +8,15 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "generate-icons": "mkdir -p src/icons src/assets && sips -Z 16 assets/icon.png --out src/icons/icon16.png && sips -Z 32 assets/icon.png --out src/icons/icon32.png && sips -Z 48 assets/icon.png --out src/icons/icon48.png && sips -Z 128 assets/icon.png --out src/icons/icon128.png && cp assets/icon.png src/assets/icon.png",
+    "generate-icons": "node scripts/generate-icons.js",
     "minify": "esbuild dist/*.js --minify --allow-overwrite --outdir=dist",
     "build": "rm -rf dist && npm run generate-icons && mkdir -p dist && cp -r src/* dist/ && npm run minify"
   },
   "devDependencies": {
     "esbuild": "^0.28.0",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "jest-environment-jsdom": "^29.7.0",
+    "sharp": "^0.34.5"
   },
   "keywords": [],
   "author": "",
