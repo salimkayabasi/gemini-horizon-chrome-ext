@@ -7,8 +7,10 @@ function setExtensionState(enabled) {
 function injectUI(enabled) {
   if (document.getElementById('gemini-pp-btn')) return;
 
-  const container = document.querySelector('.buttons-container.adv-upsell');
-  if (!container) return;
+  const advUpsell = document.querySelector('.buttons-container.adv-upsell');
+  const targetContainer = document.querySelector('.buttons-container:not(.adv-upsell)') || advUpsell;
+  
+  if (!targetContainer) return;
 
   const logoUrl = chrome.runtime.getURL('assets/icon.png');
 
@@ -17,7 +19,14 @@ function injectUI(enabled) {
   btn.id = 'gemini-pp-btn';
   btn.title = 'Gemini Horizon Settings';
   btn.innerHTML = `<img src="${logoUrl}" alt="Gemini Horizon" style="width:24px;height:24px;display:block;">`;
-  container.insertBefore(btn, container.firstChild);
+  
+  // Inject at the beginning of the target container
+  targetContainer.insertBefore(btn, targetContainer.firstChild);
+
+  // If we injected into the main container, hide the upsell container if it's empty
+  if (advUpsell && targetContainer !== advUpsell && advUpsell.children.length === 0) {
+    advUpsell.style.display = 'none';
+  }
 
   // Create Settings Modal
   const modal = document.createElement('div');
@@ -81,7 +90,7 @@ function injectUI(enabled) {
 
 function waitAndInject(enabled) {
   // Try immediate injection
-  if (document.querySelector('.buttons-container.adv-upsell')) {
+  if (document.querySelector('.buttons-container')) {
     injectUI(enabled);
     return;
   }
@@ -89,7 +98,7 @@ function waitAndInject(enabled) {
   // Use MutationObserver for dynamic page loads
   const observer = new MutationObserver(() => {
     if (!document.getElementById('gemini-pp-btn') &&
-        document.querySelector('.buttons-container.adv-upsell')) {
+        document.querySelector('.buttons-container')) {
       injectUI(enabled);
     }
   });

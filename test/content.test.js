@@ -60,10 +60,35 @@ describe('content.js', () => {
     runContentScript(true);
     expect(document.getElementById('gemini-pp-btn')).toBeNull();
     
-    document.body.innerHTML = '<div class="buttons-container adv-upsell"></div>';
+    document.body.innerHTML = '<div class="buttons-container"></div>';
     if (observerInstance) observerInstance.trigger();
     
     expect(document.getElementById('gemini-pp-btn')).not.toBeNull();
+  });
+
+  test('should hide empty adv-upsell container if main container is used', () => {
+    document.body.innerHTML = `
+      <div class="buttons-container adv-upsell"></div>
+      <div class="buttons-container main"></div>
+    `;
+    runContentScript(true);
+    
+    const upsell = document.querySelector('.adv-upsell');
+    const main = document.querySelector('.main');
+    
+    expect(main.contains(document.getElementById('gemini-pp-btn'))).toBe(true);
+    expect(upsell.style.display).toBe('none');
+  });
+
+  test('should NOT hide adv-upsell container if it is not empty', () => {
+    document.body.innerHTML = `
+      <div class="buttons-container adv-upsell"><button>Existing</button></div>
+      <div class="buttons-container main"></div>
+    `;
+    runContentScript(true);
+    
+    const upsell = document.querySelector('.adv-upsell');
+    expect(upsell.style.display).not.toBe('none');
   });
 
   test('should handle enabled: false state', () => {
