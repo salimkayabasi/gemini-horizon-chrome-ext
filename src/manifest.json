@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Horizon",
+  "description": "Experience Gemini without limits. Expands conversations and tables to the full width of your browser.",
+  "version": "1.1.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16_nb.png",
+      "48": "icons/icon48_nb.png",
+      "128": "icons/icon128_nb.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "scripting", "activeTab", "tabs"],
+  "host_permissions": ["https://gemini.google.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/logo.png", "assets/logo_no_bg.png"],
+      "matches": ["https://gemini.google.com/*"]
+    }
+  ]
+}
