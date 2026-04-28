@@ -1,7 +1,7 @@
 # 🌌 Gemini Horizon
 
 <p align="center">
-  <img src="src/assets/logo.png" width="128" height="128" alt="Gemini Horizon Logo">
+  <img src="assets/logo.png" width="128" height="128" alt="Gemini Horizon Logo">
   <br>
   <b>Experience Google Gemini without limits.</b>
   <br>

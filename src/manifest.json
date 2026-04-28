@@ -10,9 +10,9 @@
   },
   "action": {
     "default_icon": {
-      "16": "icons/icon16_nb.png",
-      "48": "icons/icon48_nb.png",
-      "128": "icons/icon128_nb.png"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
   "background": {
@@ -24,12 +24,13 @@
     {
       "matches": ["https://gemini.google.com/*"],
       "js": ["content.js"],
+      "css": ["styles.css"],
       "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["assets/logo.png", "assets/logo_no_bg.png"],
+      "resources": ["assets/icon.png"],
       "matches": ["https://gemini.google.com/*"]
     }
   ]

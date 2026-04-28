@@ -1,0 +1,110 @@
+/* Full Width Mode Styles */
+html.gemini-horizon-enabled .conversation-container,
+html.gemini-horizon-enabled .table-block,
+html.gemini-horizon-enabled .ng-star-inserted {
+  max-width: unset !important;
+}
+
+/* Injected UI Styles */
+#gemini-pp-btn {
+  cursor: pointer;
+  margin-right: 16px;
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#gemini-pp-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#gemini-pp-modal {
+  position: fixed;
+  z-index: 99999;
+  min-width: 260px;
+  background: var(--bard-color-surface-container-high, #303034);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+}
+
+#gemini-pp-modal .horizontal-container {
+  flex-direction: column;
+}
+
+.gemini-pp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+#gemini-pp-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  opacity: 0.5;
+}
+
+#gemini-pp-close:hover {
+  opacity: 1;
+}
+
+.gemini-pp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gemini-pp-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.gemini-pp-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gemini-pp-slider {
+  position: absolute;
+  inset: 0;
+  background: #555;
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.gemini-pp-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+  background: #999;
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.gemini-pp-switch input:checked + .gemini-pp-slider {
+  background: #89b4fa;
+}
+
+.gemini-pp-switch input:checked + .gemini-pp-slider::before {
+  transform: translateX(18px);
+  background: #1e1e2e;
+}
